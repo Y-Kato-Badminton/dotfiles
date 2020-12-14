@@ -103,7 +103,8 @@ FROM kube-base AS kubebuilder
 RUN set -x; cd "$(mktemp -d)" \
     && BIN_NAME="kubebuilder" \
     && REPO="kubernetes-sigs/${BIN_NAME}" \
-    && VERSION="$(curl --silent ${GITHUB}/${REPO}/${RELEASE_LATEST} | sed 's#.*tag/\(.*\)\".*#\1#' | sed 's/v//g')" \
+    # && VERSION="$(curl --silent ${GITHUB}/${REPO}/${RELEASE_LATEST} | sed 's#.*tag/\(.*\)\".*#\1#' | sed 's/v//g')" \
+    && VERSION="2.3.1" \
     && TAR_NAME="${BIN_NAME}_${VERSION}_${OS}_${ARCH}" \
     && curl -fsSLO "${GITHUB}/${REPO}/${RELEASE_DL}/v${VERSION}/${TAR_NAME}.tar.gz" \
     && tar -zxvf "${TAR_NAME}.tar.gz" \

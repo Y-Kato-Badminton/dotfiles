@@ -33,28 +33,33 @@ RUN echo $'/lib\n\
     && apt update -y \
     && apt upgrade -y \
     && apt install -y --no-install-recommends --fix-missing \
+    automake \
     bash \
     diffutils \
     exuberant-ctags \
     gawk \
     gnupg \
     graphviz \
+    gettext \
     jq \
     less \
     libhdf5-serial-dev \
+    libncurses5-dev \
     libomp-dev \
     libprotobuf-dev \
     libprotoc-dev \
+    libtool \
+    libtool-bin \
     luajit \
     mariadb-client \
     mtr \
     ncurses-term \
-    neovim \
     nodejs \
     npm \
     openssh-client \
     pass \
     perl \
+    pkg-config \
     protobuf-compiler \
     python3-dev \
     python3-pip \
@@ -67,6 +72,12 @@ RUN echo $'/lib\n\
     tmux \
     xclip \
     && rm -rf /var/lib/apt/lists/* \
+    && git clone https://github.com/neovim/neovim \
+    && cd neovim \
+    && rm -rf build \
+    && make CMAKE_EXTRA_FLAGS="-DCMAKE_INSTALL_PREFIX:PATH=/usr" CMAKE_BUILD_TYPE=Release \
+    && make install \
+    && cd /tmp && rm -rf /tmp/neovim \
     && pip3 install --upgrade pip neovim ranger-fm thefuck httpie python-language-server vim-vint grpcio-tools \
     && gem install neovim -N \
     && git clone https://github.com/soimort/translate-shell \
